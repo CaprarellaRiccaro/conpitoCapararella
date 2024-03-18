@@ -10,8 +10,8 @@ $app = AppFactory::create();
 
 $app->get('/negozio','NegozioController:dati');
 
-$app->get('/articolo','ArticoliController:array');
-$app->get('/articolo/{id}','ArticolliController:dati');
+$app->get('/articolo','ArticoloController:array');
+$app->get('/articolo/{id}','ArticoloController:dati');
 
 $app->get('/ordini','');
 $app->get('/ordini/{numero_ordine}','');

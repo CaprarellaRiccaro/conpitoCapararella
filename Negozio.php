@@ -46,20 +46,22 @@ class Negozio implements JsonSerializable{
         return array_push($this->articoli, $articolo);
     }
 
+
     function getArticolo(){
         $array = [];
-        foreach ($this->articolo as $d) {
+        foreach ($this->articoli as $d) {
             if ($d instanceof Articolo) {
-                array_push($array, $d->getIdentificativo());
+                array_push($array, $d->getArticoli());
             }
         }
         return $array;
     }
 
+    //Per la ricerca dell'articolo per ID
     function getProdotto($id)
     {
-        foreach ($this->dispositivi as $d) {
-            if ($d instanceof Articolo && $d->getNome() == $nome) {
+        foreach ($this->articoli as $d) {
+            if ($d instanceof Articolo && $d->getId() == $id) {
                 return $d;
             }
         }
@@ -86,9 +88,8 @@ class Negozio implements JsonSerializable{
         return $this->p_iva;
     }
 
-    public function __toString()
-    {
-        return "Nome: " . $this->nome . " Telefono: " . $this->telefono . " Indirizzo: " . $this->indirizzo . " URL: " . $this->url . " Partita iva: " . $this->p_iva;
+    function getArticoli(){
+        return $this->articoli;
     }
 
     public function jsonSerialize()
@@ -100,5 +101,4 @@ class Negozio implements JsonSerializable{
         }
         return $attrs;
     }
-
 }
