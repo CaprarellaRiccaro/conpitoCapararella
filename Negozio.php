@@ -12,7 +12,7 @@ class Negozio implements JsonSerializable{
     function __construct(){
         $this->nome = "Negozio-1";
         $this->telefono = 123;
-        $this->inidirizzo = "Via negozio";
+        $this->indirizzo = "Via negozio";
         $this->url = "nfal";
         $this->p_iva = 213;
         
@@ -21,7 +21,8 @@ class Negozio implements JsonSerializable{
         $this->aggiungiArticolo(new Articolo(3, "Articolo3", "Descrizione3", 11));
         
     } 
-
+//-----------------------------------------------------------------------------------
+//----------setter-------------------------------------------------------------------
     function setNome($nome){
         $this->nome = $nome;
     }
@@ -41,23 +42,24 @@ class Negozio implements JsonSerializable{
     function setP_iva($p_iva){
         $this->p_iva = $p_iva;
     }
-
+//-------------------------------------------------------------------------------------
+//Aggiunta di un prodotto nell'array
     function aggiungiArticolo($articoli){
         return array_push($this->articoli, $articolo);
     }
-
-    //Array di tutti gli articoli
+//-------------------------------------------------------------------------------------
+//getter di tutti gli articoli
     function getArticolo(){
         $array = [];
         foreach ($this->articoli as $d) {
             if ($d instanceof Articolo) {
-                array_push($array, $d->getArticoli());
+                array_push($array, $d->getNome());
             }
         }
         return $array;
     }
-
-    //Per la ricerca dell'articolo per ID
+//-------------------------------------------------------------------------------------
+//Per la ricerca dell'articolo per ID
     function getProdotto($id)
     {
         foreach ($this->articoli as $d) {
@@ -67,7 +69,8 @@ class Negozio implements JsonSerializable{
         }
         return null;
     }
-
+//--------------------------------------------------------------------------------------
+//---------getters--------------------
     function getNome(){
         return $this->nome;
     }
@@ -91,7 +94,8 @@ class Negozio implements JsonSerializable{
     function getArticoli(){
         return $this->articoli;
     }
-
+//--------------------------------------------------------------------------------------
+//Serializzazione JSON
     public function jsonSerialize()
     {
         $attrs = [];
