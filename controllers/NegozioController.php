@@ -7,9 +7,8 @@ require_once (__DIR__.'/../Negozio.php');
 
 class NegozioController{
     function dati(Request $request, Response $response, $args){
-        $negozio = new Oggetto();
-        $message = $negozio->jsonNegozio();
-        $response->getBody()->write(json_encode($message));
-        return $response->withHeader("Content-type", "application/json")->withStatus(200);
+        $impianto = new Negozio();
+        $response->getBody()->write(json_encode($impianto, JSON_PRETTY_PRINT));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
 }

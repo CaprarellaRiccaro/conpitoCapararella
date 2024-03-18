@@ -4,13 +4,14 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__.'/controllers/NegozioController.php';
+require_once __DIR__.'/controllers/ArticoloController.php';
 
 $app = AppFactory::create();
 
 $app->get('/negozio','NegozioController:dati');
 
-$app->get('/articoli','ArticoliController:array');
-$app->get('/articoli/{id}','ArticolliController:dati');
+$app->get('/articolo','ArticoliController:array');
+$app->get('/articolo/{id}','ArticolliController:dati');
 
 $app->get('/ordini','');
 $app->get('/ordini/{numero_ordine}','');

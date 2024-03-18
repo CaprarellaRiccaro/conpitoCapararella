@@ -9,12 +9,17 @@ class Negozio implements JsonSerializable{
     protected $p_iva;
     protected $articoli = [];
 
-    function __construct($nome, $telefono, $indirizzo, $url, $p_iva, $articoli){
-        $this->nome = $nome;
-        $this->telefono = $telefono;
-        $this->indirizzo = $indirizzo;
-        $this->url = $url;
-        $this->p_iva = $p_iva;
+    function __construct(){
+        $this->nome = "Negozio-1";
+        $this->telefono = 123;
+        $this->inidirizzo = "Via negozio";
+        $this->url = "nfal";
+        $this->p_iva = 213;
+        
+        $this->aggiungiArticolo(new Articolo(1, "Articolo1", "Descrizione1", 11));
+        $this->aggiungiArticolo(new Articolo(2, "Articolo2", "Descrizione2", 11));
+        $this->aggiungiArticolo(new Articolo(3, "Articolo3", "Descrizione3", 11));
+        
     } 
 
     function setNome($nome){
@@ -37,8 +42,28 @@ class Negozio implements JsonSerializable{
         $this->p_iva = $p_iva;
     }
 
-    function setArticolo($articolo){
-        $this->articolo = $articolo;
+    function aggiungiArticolo($articoli){
+        return array_push($this->articoli, $articolo);
+    }
+
+    function getArticolo(){
+        $array = [];
+        foreach ($this->articolo as $d) {
+            if ($d instanceof Articolo) {
+                array_push($array, $d->getIdentificativo());
+            }
+        }
+        return $array;
+    }
+
+    function getProdotto($id)
+    {
+        foreach ($this->dispositivi as $d) {
+            if ($d instanceof Articolo && $d->getNome() == $nome) {
+                return $d;
+            }
+        }
+        return null;
     }
 
     function getNome(){
@@ -68,13 +93,12 @@ class Negozio implements JsonSerializable{
 
     public function jsonSerialize()
     {
-        return [
-            'nome' => $this->getNome(),
-            'telefono' => $this->getTelefono(),
-            'Indirizzo' => $this->getIndirizzo(),
-            'Url' => $this->getUrl(),
-            'Partita iva' => $this->getP_iva(),
-        ];
+        $attrs = [];
+        $class_vars = get_class_vars(get_class($this));
+        foreach ($class_vars as $name => $value) {
+            $attrs[$name] = $this->{$name};
+        }
+        return $attrs;
     }
 
 }
