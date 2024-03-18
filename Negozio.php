@@ -46,7 +46,7 @@ class Negozio implements JsonSerializable{
         return array_push($this->articoli, $articolo);
     }
 
-
+    //Array di tutti gli articoli
     function getArticolo(){
         $array = [];
         foreach ($this->articoli as $d) {
